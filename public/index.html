@@ -13,8 +13,12 @@
     <script
         src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
 
-        <script src="https://aframe.io/aframe/examples/js/play-on-click.js"></script>
-        <script src="https://aframe.io/aframe/examples/js/hide-on-play.js"></script>
+    <script src="https://aframe.io/aframe/examples/js/play-on-click.js"></script>
+    <script src="https://aframe.io/aframe/examples/js/hide-on-play.js"></script>
+
+    <!--Dolby Communcations API scripts-->
+    <script type="text/javascript" src="https://unpkg.com/@voxeet/voxeet-web-sdk"></script>
+    <script type="text/javascript" src="scripts/ui.js"></script>
 </head>
 
 <body>
@@ -22,21 +26,19 @@
     <a-scene>
 
         <a-assets timeout="9000">
-            <video id="videosrc" preload="auto" src="https://cdn.aframe.io/videos/bunny.mp4" width="160" height="90"
-                autoplay loop="true" playsinline crossOrigin="anonymous"></video>
+            <video id="videosrc" muted preload="auto" src="https://cdn.aframe.io/videos/bunny.mp4" width="160"
+                height="90" autoplay loop="true" playsinline crossOrigin="anonymous"></video>
         </a-assets>
 
 
         <!-- Using the asset management system. -->
         <a-video src="#videosrc" width="16" height="9" position="0 5.5 -20"></a-video>
 
-        <a-entity material="shader: flat; src: #videosrc"
-        geometry="primitive: plane; width: 160; height: 90;"
-        position="0 60 -250"
-        play-on-click
-        rotation="0 35 0"
-        visible="false">
-</a-entity>
+        <a-entity material="shader: flat; src: #videosrc" geometry="primitive: plane; width: 160; height: 90;"
+            position="0 60 -250" play-on-click rotation="0 35 0" visible="false">
+        </a-entity>
+
+        <a-text id="logText" rotation="0 -90 0" position="5 3 -7" value="Are you logged in?"></a-text>
 
         <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
         <!-- <a-video width="16" height="9" position="0 5 -20" src="#penguin-sledding"></a-video> -->
@@ -68,5 +70,9 @@
         }
     }
 </script>
+
+
+<!--more dolby scripts-->
+<script type="text/javascript" src="scripts/client.js"></script>
 
 </html>
