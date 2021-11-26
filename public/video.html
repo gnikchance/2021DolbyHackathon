@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DolbyVR Project</title>
+    <link rel="icon" href="data:,">
+
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+
+    <!--RTC REFERENCE FILES-->
+    
+
+    <!--PLAY ON CLICK FOR VIDEO-->
+    <script src="https://aframe.io/aframe/examples/js/play-on-click.js"></script>
+    <script src="https://aframe.io/aframe/examples/js/hide-on-play.js"></script>
+
+    <!--Dolby Communcations API scripts-->
+    <script type="text/javascript" src="https://unpkg.com/@voxeet/voxeet-web-sdk"></script>
+    <script type="text/javascript" src="scripts/ui.js"></script>
+</head>
+
+<body>
+
+    <a-scene>
+
+        <a-assets timeout="9000">
+            <video id="videosrc" preload="auto" src="https://cdn.aframe.io/videos/bunny.mp4" width="160" height="90"
+                autoplay loop="true" playsinline crossOrigin="anonymous"></video>
+
+            <template id="avatar-template">
+                <a-sphere></a-sphere>
+            </template>
+        </a-assets>
+
+
+        <!-- Using the asset management system. -->
+        <a-video src="#videosrc" width="16" height="9" position="0 5.5 -20"></a-video>
+
+        <a-entity material="shader: flat; src: #videosrc" geometry="primitive: plane; width: 160; height: 90;"
+            position="0 60 -250" play-on-click rotation="0 35 0" visible="false">
+        </a-entity>
+
+        <a-text id="logText" rotation="0 -90 0" position="5 3 -7" value="Are you logged in?"></a-text>
+
+        <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
+        <!-- <a-video width="16" height="9" position="0 5 -20" src="#penguin-sledding"></a-video> -->
+
+
+
+        <!-- <a-box id="cube" class="clickable" position="-1 0.66921 -3" rotation="0 45 0" color="#4CC3D9" visible="true"></a-box> -->
+
+        <a-entity laser-controls="hand: right"></a-entity>
+        <a-entity oculus-touch-controls="hand: left; model: true;"></a-entity>
+        <a-entity oculus-touch-controls="hand: right; model: true"></a-entity>
+        <a-sphere id="sphere" position="-15 50 -70" radius="4" color="#EF2D5E"></a-sphere>
+
+        <!--PLAYER-->
+        
+
+        <a-entity id="env" environment="preset: starry"></a-entity>
+    </a-scene>
+
+</body>
+
+<!-- change environment logic -->
+<script>
+    document.body.onkeyup = function (e) {
+        if (e.keyCode == 32) {//keycode for spacebar is 32
+            var environment = ["egypt", "checkerboard", "forest", "goaland", "yavapai", "goldmine", "threetowers", "poison", "arches", "tron", "japan", "dream", "volcano", "starry", "osiris"]; //different presets(environment style) stored in //environment array
+            var bool = [true, false]
+            var item = environment[Math.floor(Math.random() * environment.length)];//selecting a random preset from environment array
+
+
+            document.getElementById('sphere').setAttribute('color', 'pink');
+
+            var place = 'preset: ' + item;
+            console.log(place);
+            document.getElementById('env').setAttribute('environment', place);
+        }
+    }
+</script>
+
+
+<!--more dolby scripts-->
+<script type="text/javascript" src="scripts/client.js"></script>
+
+</html>

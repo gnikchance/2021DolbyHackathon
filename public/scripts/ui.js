@@ -13,7 +13,7 @@ const initUI = () => {
         VoxeetSDK.conference.create({ alias: conferenceAlias })
             .then((conference) => VoxeetSDK.conference.join(conference, {}))
             .then(() => {
-                joinButton.disabled = true;
+                // joinButton.disabled = true;
             })
             .catch((err) => console.error(err));
   };
